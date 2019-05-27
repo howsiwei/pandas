@@ -64,6 +64,7 @@ from pandas.core.dtypes.common import (
     ensure_float64,
     ensure_int64,
     ensure_platform_int,
+    is_array_like,
     is_list_like,
     is_nested_list_like,
     is_iterator,
@@ -3371,8 +3372,34 @@ class DataFrame(NDFrame):
                 if len(value.columns) != len(key):
                     raise ValueError('Columns must be same length as key')
                 for k1, k2 in zip(key, value.columns):
-                    self[k1] = value[k2]
+                    self._set_item(k1, value[k2])
+                    # self[k1] = value[k2]
             else:
+                # if not is_array_like(value):
+                #     key1 = []
+                #     if is_list_like(value):
+                #         value1 = []
+                #         for k, v in zip(key, value):
+                #             if k in self.columns:
+                #                 key1.append(k)
+                #                 value1.append(v)
+                #             else:
+                #                 self._set_item(k, v)
+                #                 # self[k] = v
+                #         value = value1[0] if len(value1) == 1 else value1
+                #     else:
+                #         for k in key:
+                #             if k in self.columns:
+                #                 key1.append(k)
+                #             else:
+                #                 self._set_item(k, value)
+                #                 # self[k] = value
+                #     if len(key1) == 0:
+                #         return
+                #     elif len(key1) == 1:
+                #         self._set_item(key1[0], value)
+                #         return
+                #     key = key1
                 indexer = self.loc._convert_to_indexer(key, axis=1)
                 self._check_setitem_copy()
                 self.loc._setitem_with_indexer((slice(None), indexer), value)

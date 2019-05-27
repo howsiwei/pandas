@@ -265,6 +265,7 @@ class _NDFrameIndexer(_NDFrameIndexerBase):
         return ax._convert_slice_indexer(key, kind=self.name)
 
     def _has_valid_setitem_indexer(self, indexer):
+        # return self._has_valid_positional_setitem_indexer(indexer)
         return True
 
     def _has_valid_positional_setitem_indexer(self, indexer):
@@ -283,6 +284,11 @@ class _NDFrameIndexer(_NDFrameIndexerBase):
                     pass
                 elif is_list_like_indexer(i):
                     # should check the elements?
+                    # import pdb; pdb.set_trace()
+                    # for j in i:
+                    #     if j >= len(ax) or j < 0:
+                    #         raise IndexError("{name} cannot enlarge its target "
+                    #                         "object".format(name=self.name))
                     pass
                 elif is_integer(i):
                     if i >= len(ax):
@@ -295,6 +301,7 @@ class _NDFrameIndexer(_NDFrameIndexerBase):
         return True
 
     def _setitem_with_indexer(self, indexer, value):
+        # import pdb; pdb.set_trace()
         self._has_valid_setitem_indexer(indexer)
 
         # also has the side effect of consolidating in-place

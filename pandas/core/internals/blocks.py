@@ -891,6 +891,10 @@ class Block(PandasObject):
 
         # set
         else:
+            # import pdb; pdb.set_trace()
+            print(values)
+            print(indexer)
+            print(value)
             values[indexer] = value
 
         # coerce and try to infer the dtypes of the result

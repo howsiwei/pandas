@@ -1022,6 +1022,7 @@ class BlockManager(PandasObject):
 
         # TODO(EA): Remove an is_extension_ when all extension types satisfy
         # the interface
+        # import pdb; pdb.set_trace()
         value_is_extension_type = (is_extension_type(value) or
                                    is_extension_array_dtype(value))
 
